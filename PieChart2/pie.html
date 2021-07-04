@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Making a Pie Chart</title>
+    <script src="https://unpkg.com/d3@6.5.0/dist/d3.min.js"></script>
+    <style>
+      text{
+          font-size: 1.5em;
+          font-weight: bold;
+          fill: blanchedalmond;
+      }  
+    </style>
+</head>
+<body>
+  <script>
+      var width = 500, height = 500;                //schemePastel1
+      var colors = d3.scaleOrdinal(d3.schemeDark2); //give color scheme
+      var svg = d3.select('body').append('svg')
+                    .attr('width', width).attr('height', height)
+                    .style('background', 'black');
+
+      var data = [{grade: "A+", number: 8}, {grade: "A", number: 21},
+                {grade: "B", number: 15}, {grade: "C", number: 29},
+                {grade: "D", number: 11}, {grade: "F", number: 6}];   
+                
+      var det = d3.pie().sort(null).value(d => {return d.number;})(data);     
+      console.log(det);
+
+      var segm = d3.arc()
+                  .innerRadius(0)
+                  .outerRadius(200)
+                  .padAngle(.05)
+                  .padRadius(50);
+
+      var sect = svg.append('g').attr('transform', 'translate(250, 250)')
+                    .selectAll('path').data(det);
+      sect.enter().append('path')
+          .attr('d', segm)
+          .attr('fill', d => {return colors(d.data.number);});  
+          
+      var content = d3.select('g').selectAll('text').data(det);
+      content.enter().append('text').each(d => {
+          var center = segm.centroid(d);
+          d3.select(this).attr('x', center[0]).attr('y', center[1])
+                      .text(d.data.number)
+      })     
+  </script>
+</body>
+</html>

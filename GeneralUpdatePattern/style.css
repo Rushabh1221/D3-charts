@@ -1,0 +1,14 @@
+body{
+    margin: 0px;
+    overflow: hidden;
+}
+
+text{
+    font-size: 1.5em;
+    text-anchor: middle;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+rect{
+    fill: #e5ddbc;
+}

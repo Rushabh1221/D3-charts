@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <title>Google Charts Bar Chart</title>
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <script type="text/javascript">
+      google.charts.load("current", { packages: ["corechart"] });
+    </script>
+  </head>
+
+  <body>
+    <div
+      id="container"
+      style="width: 550px; height: 400px; margin: 0 auto"
+    ></div>
+    <script language="JavaScript">
+      function drawChart() {
+        // Data to draw the chart.
+        var data = google.visualization.arrayToDataTable([
+          ["Year", "Asia", { role: 'style' }],
+          ["2012", 950, 'gold'],
+          ["2013", 1050, 'gold'],
+          ["2014", 1000, 'gold'],
+          ["2015", 1300, 'gold'],
+          ["2016", 1530, 'gold'],
+        ]);
+
+        var options = { title: "Population (in millions)" };
+
+        // Instantiate and draw the chart.
+        var chart = new google.visualization.BarChart(
+          document.getElementById("container")
+          );
+        chart.draw(data, options);
+      }
+      google.charts.setOnLoadCallback(drawChart);
+    </script>
+  </body>
+</html>

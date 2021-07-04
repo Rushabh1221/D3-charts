@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Making a Line Chart</title>
+    <link href="BarChart\style.css" rel="stylesheet">
+    <script src="https://unpkg.com/d3@6.5.0/dist/d3.min.js"></script>
+</head>
+<body>
+  <svg width="700" height="500"></svg>
+
+  <script>
+
+    var data = [
+        {stage:0, sales:80},
+        {stage:100, sales:100},
+        {stage:200, sales:30},
+        {stage:300, sales:40},
+        {stage:400, sales:50},
+        {stade:500, sales:80}
+    ];
+
+     const svg = d3.select('svg');
+    /* svg.append('line')
+        .attr('x1', 10)
+        .attr('y1', 20) 
+        .attr('x2', 600) 
+        .attr('y2', 20)
+        .style('stroke', 'blue')
+    */
+   const line = d3.line()
+       //.Curve(d3.curveCardinal()) //curveLinear//curveNatural//curveBundle//curveMonotone
+       .x(d => d.stage)
+       .y(d => d.sales);
+    svg.append('path')
+        .data([data])
+        .attr('d', line) 
+        .style('fill', 'none')
+        .style('stroke', 'blue')      
+  </script>
+</body>
+</html>
